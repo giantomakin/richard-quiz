@@ -17,6 +17,11 @@
     },
     "autoload": {
         "classmap": [
+        	"app/Console/Commands",
+        	"app/Http/Controllers",
+        	"app/Models",
+        	"database/migrations",
+        	"database/seeds",
             "database"
         ],
         "psr-4": {

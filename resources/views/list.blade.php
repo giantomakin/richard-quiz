@@ -13,7 +13,7 @@
 								@include('layouts.left-panel')
 		                     </div>
 		                     <div class="col-md-8">
-		                         @include('contents.home')
+		                         @include('contents.list')
 		                     </div>
 		                 </div>
                 </div>

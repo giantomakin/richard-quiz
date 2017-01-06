@@ -16,5 +16,11 @@ Route::get('/', function () {
 });
 
 Route::auth();
-
+//views
 Route::get('/home', 'HomeController@index');
+Route::get('/create', 'HomeController@createView');
+Route::get('/list', 'HomeController@quizList');
+Route::get('/quiz/{id}', 'HomeController@getQuiz');
+//crud
+Route::post('/create', 'HomeController@createQuiz');
+Route::get('/remove-quiz/{id}', 'HomeController@removeQuiz');
