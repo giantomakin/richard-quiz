@@ -1,9 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<ul class="breadcrumb">
-			<li><a href="#">Home</a></li>
-			<li class="active">List</li>
-		</ul>
+		List
 	</div>
 
 	<div class="panel-body">

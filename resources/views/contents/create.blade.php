@@ -1,15 +1,12 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<ul class="breadcrumb">
-		  <li><a href="#">Home</a></li>
-		  <li class="active">Create</li>
-		</ul>
+		Create
 	</div>
 
 	<div class="panel-body">
 		<form action="{{url('create')}}" role="form" method="post">
 			{{ csrf_field() }}
-			<div class="form-group">
+			<div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
 				<label for="type">Type</label>
 				<select name="type" class="form-control">
 					<option value="se" >Single Quiz</option>
@@ -22,7 +19,7 @@
 				</span>
 				@endif
 			</div>
-			<div class="form-group">
+			<div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
 				<label for="title">Title</label>
 				<input name="title" class="form-control" id="title" placeholder="Quiz Title">
 				@if ($errors->has('title'))
@@ -31,7 +28,14 @@
 				</span>
 				@endif
 			</div>
-			<button type="submit" class="btn btn-success pull-right">Create Quiz</button>
+			<div class="form-group">
+			    <div class="col-md-12">
+			        <button type="submit" class="btn btn-success pull-right">
+			            <i class="fa fa-btn fa-sign-in"></i> Create Quiz
+			        </button>
+
+			    </div>
+			</div>
 		</form>
 	</div>
 </div>
