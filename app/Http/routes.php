@@ -20,6 +20,7 @@ Route::auth();
 Route::get('home', 'HomeController@index');
 Route::get('create', 'HomeController@createView');
 Route::get('list', 'HomeController@quizList');
+Route::get('create/user', 'HomeController@createUserView');
 Route::get('quiz/{id}', 'HomeController@getQuiz');
 //admin crud
 Route::post('/create', 'HomeController@createQuiz');
@@ -32,6 +33,7 @@ Route::get('quiz/multi/{unique_id}', 'FrontController@getMultiQuiz');
 Route::get('quiz/poll/{unique_id}', 'FrontController@getPollQuiz');
 //front crud
 Route::post('quiz/result/{id}/{ans_id}', 'FrontController@result');
+Route::post('quiz/result/mc', 'FrontController@resultMC');
 //front ajax
 Route::get('quiz/get/{unique_id}', 'FrontController@getQuiz');
 Route::post('quiz/update-counter', 'FrontController@updateCounter');

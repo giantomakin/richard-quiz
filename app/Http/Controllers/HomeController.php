@@ -54,9 +54,16 @@ class HomeController extends Controller
     	return view('create',$this->data);
     }
 
+    public function createUserView()
+    {
+    	return view('create-user',$this->data);
+    }
+
     public function quizList()
     {
-    	$this->data['quizzes'] = HomeModel::paginate(10);
+    	$this->data['quizzes1'] = HomeModel::where('type', 'se')->paginate(10);
+    	$this->data['quizzes2'] = HomeModel::where('type', 'co')->paginate(10);
+    	$this->data['quizzes3'] = HomeModel::where('type', 'mc')->paginate(10);
     	return view('list',$this->data);
     }
 

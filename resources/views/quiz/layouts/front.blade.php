@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="RQ">
+<html lang="en" ng-app="RQ" ng-cloak>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +15,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="{{url('css/app.css')}}">
+    <link rel="stylesheet" href="{{ elixir("css/app.css") }}">
     <script src="https://use.fontawesome.com/2b0f0783a8.js"></script>
     <style>
         body {
@@ -44,7 +44,7 @@
             }
         });
     </script>
-    <script src="{{url('js/front.js')}}"></script>
+    <script src="{{ elixir("js/app.js") }}"></script>
 
 </body>
 </html>

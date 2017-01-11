@@ -45,6 +45,24 @@ class FrontController extends Controller
     	return Response::json($data);
     }
 
+    public function resultMC(Request $request)
+    {
+    	$quizzer = HomeModel::where('unique_id',$request->key)->first();
+    	$datas =  json_decode($quizzer->data, true);
+
+    	foreach ($datas as $key => $value) {
+    		if($value['answer_id'] == $request->id){
+    			if($value['answer'] == $request->value){
+    				return  Response::json(["response" =>"true" , "ad" => $value['ad']]);
+    			} else {
+    				return Response::json(["response" =>"false" , "ad" => $value['ad']]);
+    			}
+    		}
+    		continue;
+
+    	}
+    }
+
     public function getQuiz($unique_id)
     {
     	$quizzer = HomeModel::where('unique_id',$unique_id)->first();

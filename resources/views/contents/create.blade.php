@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		Create
+		Create Quiz
 	</div>
 
 	<div class="panel-body">

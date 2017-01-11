@@ -8,7 +8,7 @@
 				<div class="col-md-12">
 					<ul class="breadcrumb">
 						<li><a href="#">Home</a></li>
-						<li class="active">List</li>
+						<li class="active">My Quizzes</li>
 					</ul>
 				</div>
 				<div class="col-md-4">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="backendApp">
+<html lang="en" ng-app="backendApp" ng-cloak>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +27,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -82,6 +82,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-sanitize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
-    <script src="{{url('js/app.js')}}"></script>
+    <script>
+    	$(document).ready(function(){
+    		var app;
+    		var readURL;
+    		new Clipboard('.btn');
+    		readURL = function(input) {
+    		  var reader;
+    		  if (input.files && input.files[0]) {
+    		    reader = new FileReader;
+    		    reader.onload = function(e) {
+    		      return $(input).prev().attr('src', e.target.result);
+    		    };
+    		    return reader.readAsDataURL(input.files[0]);
+    		  }
+    		};
+    		$(document).on('change', '.input-image', function() {
+    		  return readURL(this);
+    		});
+    	});
+    </script>
+    <script src="{{ elixir("js/app.js") }}"></script>
 </body>
 </html>
