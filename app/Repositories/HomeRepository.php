@@ -1,5 +1,4 @@
 <?php
-// app/Repositories/PostRepository.php
 namespace App\Repositories\Home;
 
 use App\Repositories\Home\HomeRepositoryInterface;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Models\Home\Home as HomeModel;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Repositories\Front\FrontRepository;
 use Validator;
 use Redirect;
 use Session;
@@ -13,14 +14,15 @@ use Response;
 class FrontController extends Controller
 {
 
+	protected $front;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(FrontRepository $front)
     {
-
+    	$this->front = $front;
     }
 
     /**
@@ -31,7 +33,7 @@ class FrontController extends Controller
 
     public function result($unique_id,$ans)
     {
-    	$quizzer = HomeModel::where('unique_id',$unique_id)->first();
+    	$quizzer = $this->front->findBy('unique_id',$unique_id)->first();
 
     	if ($ans == $quizzer['answer']) {
 
@@ -47,7 +49,7 @@ class FrontController extends Controller
 
     public function resultMC(Request $request)
     {
-    	$quizzer = HomeModel::where('unique_id',$request->key)->first();
+    	$quizzer = $this->front->findBy('unique_id',$request->key)->first();
     	$datas =  json_decode($quizzer->data, true);
 
     	foreach ($datas as $key => $value) {
@@ -65,7 +67,7 @@ class FrontController extends Controller
 
     public function getQuiz($unique_id)
     {
-    	$quizzer = HomeModel::where('unique_id',$unique_id)->first();
+    	$quizzer = $this->front->findBy('unique_id',$unique_id)->first();
     	return Response::json($quizzer);
     }
 
@@ -92,7 +94,7 @@ class FrontController extends Controller
     	$id = $request->id;
     	$counterArr = $request->counters;
 
-    	$quizz = HomeModel::find($id);
+    	$quizz = $this->front->find($id);
     	$quizz->data_counter = json_encode($counterArr);
     	$quizz->save();
 
