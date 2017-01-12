@@ -121,7 +121,7 @@
 						<a href="#" class="btn btn-danger pull-right" ng-click="removeAnswer(items, $index)" style="margin-right:20px"><i class="fa fa-times-circle" aria-hidden="true" style="margin:0"></i></a>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label text-right">Answer Image:</label> <div class="col-sm-10">
+						<label class="col-sm-2 control-label text-right">Answer Image @{{$index+1}}:</label> <div class="col-sm-10">
 
 						<img src="@{{item.image}}" class="img-responsive">
 						<input type="file" name="answers[@{{$index+1}}][image]" class="form-control input-image">
@@ -132,12 +132,12 @@
 
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label text-right">Answer Outcome:</label> <div class="col-sm-10">
+					<label class="col-sm-2 control-label text-right">Answer Outcome @{{$index+1}}:</label> <div class="col-sm-10">
 					<textarea name="answers[@{{$index+1}}][outcome]" class="form-control" rows="5">@{{item.outcome}}</textarea>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label text-right">Answer Ad:</label> <div class="col-sm-10">
+				<label class="col-sm-2 control-label text-right">Answer Ad @{{$index+1}}:</label> <div class="col-sm-10">
 				<textarea name="answers[@{{$index+1}}][ad]" class="form-control" rows="5">@{{item.ad}}</textarea>
 			</div>
 		</div>

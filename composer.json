@@ -20,6 +20,7 @@
         	"app/Console/Commands",
         	"app/Http/Controllers",
         	"app/Models",
+        	"app/Repositories",
         	"database/migrations",
         	"database/seeds",
             "database"

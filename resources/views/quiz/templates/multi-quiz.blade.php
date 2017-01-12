@@ -39,7 +39,7 @@
 								Answer is: @{{item.answer}}
 							</h2>
 							<br>
-								<img class="img-responsive" src="@{{item.outcome_image}}" alt="@{{item.answer}}" style="margin: 0 auto;"">
+								<img ng-if="item.outcome_image != ''" class="img-responsive" src="@{{item.outcome_image}}" alt="@{{item.answer}}" style="margin: 0 auto;">
 
 							<blockquote class="blockquote" style="margin-top:10px">
 							  <p class="m-b-0" ng-cloak>@{{item.outcome}}</p>

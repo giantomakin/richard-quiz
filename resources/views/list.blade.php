@@ -11,10 +11,10 @@
 						<li class="active">My Quizzes</li>
 					</ul>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-2">
 					@include('layouts.left-panel')
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-10">
 					@include('contents.list')
 				</div>
 			</div>

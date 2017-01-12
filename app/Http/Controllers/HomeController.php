@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Models\Home\Home as HomeModel;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Repositories\Home\HomeRepository;
 use Validator;
 use Redirect;
 use Session;
@@ -26,17 +27,18 @@ class HomeController extends Controller
 	const D_PATH = 'examimg';
 
 	private $validator;
-
+	protected $home;
 	protected $data;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(HomeRepository $home)
     {
         $this->middleware('auth');
-        $this->data['quiz_count'] = HomeModel::all()->count();
+        $this->home = $home;
+        $this->data['quiz_count'] = $this->home->count();
     }
 
     /**
@@ -61,9 +63,9 @@ class HomeController extends Controller
 
     public function quizList()
     {
-    	$this->data['quizzes1'] = HomeModel::where('type', 'se')->paginate(10);
-    	$this->data['quizzes2'] = HomeModel::where('type', 'co')->paginate(10);
-    	$this->data['quizzes3'] = HomeModel::where('type', 'mc')->paginate(10);
+    	$this->data['quizzes1'] = $this->home->findBy('type', 'se')->paginate(10);
+    	$this->data['quizzes2'] = $this->home->findBy('type', 'co')->paginate(10);
+    	$this->data['quizzes3'] = $this->home->findBy('type', 'mc')->paginate(10);
     	return view('list',$this->data);
     }
 
@@ -81,7 +83,7 @@ class HomeController extends Controller
     			'unique_id' => time() . uniqid(),
     			'type' => $request->type
     			);
-    		$id = HomeModel::create($data)->id;
+    		$id = $this->home->create($data)->id;
     		Session::flash('success', 'Added successfully');
     		return Redirect::to('quiz/' . $id);
     	}
@@ -89,13 +91,13 @@ class HomeController extends Controller
 
     public function ajaxGetQuiz($id)
     {
-    	$quizzer = HomeModel::find($id);
+    	$quizzer = $this->home->find($id);
     	return Response::json($quizzer);
     }
 
     public function getQuiz($id)
     {
-    	$quizzer = HomeModel::find($id);
+    	$quizzer = $this->home->find($id);
     	$this->data['quiz'] = $quizzer;
     	$this->data['action'] = url('update') . '/' . $id;
 
@@ -122,7 +124,7 @@ class HomeController extends Controller
     	$counter = [];
     	$flag = false;
     	$outcome_flag = false;
-    	$quizzermodel = HomeModel::find($id);
+    	$quizzermodel = $this->home->find($id);
     	$this->validator = Validator::make($request->all(), $this->rules2);
 
     	if ($this->validator->fails()) {
@@ -192,7 +194,7 @@ class HomeController extends Controller
 
     public function removeQuiz($id)
     {
-    	HomeModel::destroy($id);
+    	$this->home->destroy($id);
     	Session::flash('success', 'Deleted successfully');
     	return Redirect::to('list');
     }

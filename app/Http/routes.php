@@ -23,8 +23,8 @@ Route::get('list', 'HomeController@quizList');
 Route::get('create/user', 'HomeController@createUserView');
 Route::get('quiz/{id}', 'HomeController@getQuiz');
 //admin crud
-Route::post('/create', 'HomeController@createQuiz');
-Route::post('/update/{id}', 'HomeController@updateQuiz');
+Route::post('create', 'HomeController@createQuiz');
+Route::post('update/{id}', 'HomeController@updateQuiz');
 Route::get('remove-quiz/{id}', 'HomeController@removeQuiz');
 Route::get('quiz/api/{id}', 'HomeController@ajaxGetQuiz');
 //front views
