@@ -286,7 +286,11 @@
 }).call(this);
 
 (function() {
-  angular.module('backendApp', ['ngRoute']).controller('backendCtrl', function($scope, $element, $http) {
+  var app;
+
+  app = angular.module('backendApp', ['ngRoute']);
+
+  app.controller('backendCtrl', function($scope, $element, $http) {
     var question_id;
     question_id = void 0;
     $scope.count = 1;

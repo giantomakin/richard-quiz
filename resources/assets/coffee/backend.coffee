@@ -1,4 +1,5 @@
-angular.module('backendApp', [ 'ngRoute' ]).controller 'backendCtrl', ($scope, $element, $http) ->
+app = angular.module('backendApp', [ 'ngRoute' ])
+app.controller 'backendCtrl', ($scope, $element, $http) ->
   question_id = undefined
   $scope.count = 1
   question_id = $element.find('#question_id').val()
