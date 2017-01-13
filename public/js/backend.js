@@ -17,6 +17,7 @@
     }).then((function(response) {
       var jsonData;
       jsonData = void 0;
+
       $scope.quiz = response.data;
       if ($scope.quiz.data !== '') {
         jsonData = JSON.parse($scope.quiz.data);
