@@ -102,6 +102,6 @@
     		});
     	});
     </script>
-    <script src="{{ elixir("js/app.js") }}"></script>
+    <script src="{{url("/")}}{{ elixir("js/app.js") }}"></script>
 </body>
 </html>
