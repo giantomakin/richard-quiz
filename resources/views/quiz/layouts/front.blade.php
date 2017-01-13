@@ -15,7 +15,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="{{ elixir("css/app.css") }}">
+    <link rel="stylesheet" href="{{url('/')}}{{ elixir("css/app.css") }}">
     <script src="https://use.fontawesome.com/2b0f0783a8.js"></script>
     <style>
         body {
@@ -44,7 +44,7 @@
             }
         });
     </script>
-    <script src="{{ elixir("js/app.js") }}"></script>
+    <script src="{{url('/')}}{{ elixir("js/app.js") }}"></script>
 
 </body>
 </html>
