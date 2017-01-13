@@ -25,10 +25,10 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $this->app->bind(
-        	'App\Repositories\HomeRepositoryInterface',
-        	'App\Repositories\HomeRepository',
-        	'App\Repositories\FrontRepositoryInterface',
-        	'App\Repositories\FrontRepository'
+        	'App\Repositories\QuizRepository',
+        	'App\Repositories\CountableRepository',
+        	'App\Repositories\QuizInterface',
+        	'App\Repositories\CountableInterface'
         	);
     }
 }

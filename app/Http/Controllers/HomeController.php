@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Models\Home\Home as HomeModel;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\Repositories\Home\HomeRepository;
+use App\Repositories\Quiz\QuizRepository;
+use App\Repositories\Quiz\CountableRepository;
 use Validator;
 use Redirect;
 use Session;
@@ -27,18 +28,20 @@ class HomeController extends Controller
 	const D_PATH = 'examimg';
 
 	private $validator;
-	protected $home;
+	protected $quiz;
+	protected $countable;
 	protected $data;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(HomeRepository $home)
+    public function __construct(QuizRepository $quiz, CountableRepository $countable)
     {
-        $this->middleware('auth');
-        $this->home = $home;
-        $this->data['quiz_count'] = $this->home->count();
+    	$this->middleware('auth');
+    	$this->quiz = $quiz;
+    	$this->countable = $countable;
+    	$this->data['quiz_count'] = $this->countable->count();
     }
 
     /**
@@ -48,7 +51,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home',$this->data);
+    	return view('home',$this->data);
     }
 
     public function createView()
@@ -63,9 +66,9 @@ class HomeController extends Controller
 
     public function quizList()
     {
-    	$this->data['quizzes1'] = $this->home->findBy('type', 'se')->paginate(10);
-    	$this->data['quizzes2'] = $this->home->findBy('type', 'co')->paginate(10);
-    	$this->data['quizzes3'] = $this->home->findBy('type', 'mc')->paginate(10);
+    	$this->data['quizzes1'] = $this->quiz->findBy('type', 'se')->paginate(10);
+    	$this->data['quizzes2'] = $this->quiz->findBy('type', 'co')->paginate(10);
+    	$this->data['quizzes3'] = $this->quiz->findBy('type', 'mc')->paginate(10);
     	return view('list',$this->data);
     }
 
@@ -83,7 +86,7 @@ class HomeController extends Controller
     			'unique_id' => time() . uniqid(),
     			'type' => $request->type
     			);
-    		$id = $this->home->create($data)->id;
+    		$id = $this->quiz->create($data)->id;
     		Session::flash('success', 'Added successfully');
     		return Redirect::to('quiz/' . $id);
     	}
@@ -91,26 +94,26 @@ class HomeController extends Controller
 
     public function ajaxGetQuiz($id)
     {
-    	$quizzer = $this->home->find($id);
+    	$quizzer = $this->quiz->find($id);
     	return Response::json($quizzer);
     }
 
     public function getQuiz($id)
     {
-    	$quizzer = $this->home->find($id);
+    	$quizzer = $this->quiz->find($id);
     	$this->data['quiz'] = $quizzer;
     	$this->data['action'] = url('update') . '/' . $id;
 
     	switch ($quizzer->type) {
     		case 'se':
-    			$this->data['iframe_src'] = url('quiz/single') . '/' . $quizzer->unique_id;
-    			break;
+    		$this->data['iframe_src'] = url('quiz/single') . '/' . $quizzer->unique_id;
+    		break;
     		case 'co':
-    			$this->data['iframe_src'] = url('quiz/poll') . '/' . $quizzer->unique_id;
-    			break;
+    		$this->data['iframe_src'] = url('quiz/poll') . '/' . $quizzer->unique_id;
+    		break;
     		case 'mc':
-    			$this->data['iframe_src'] = url('quiz/multi') . '/' . $quizzer->unique_id;
-    			break;
+    		$this->data['iframe_src'] = url('quiz/multi') . '/' . $quizzer->unique_id;
+    		break;
     	}
 
     	return view( 'quiz', $this->data );
@@ -124,7 +127,7 @@ class HomeController extends Controller
     	$counter = [];
     	$flag = false;
     	$outcome_flag = false;
-    	$quizzermodel = $this->home->find($id);
+    	$quizzermodel = $this->quiz->find($id);
     	$this->validator = Validator::make($request->all(), $this->rules2);
 
     	if ($this->validator->fails()) {
@@ -159,12 +162,12 @@ class HomeController extends Controller
     			if($quizzermodel->type == 'mc'){
     				$quizzermodel->results = json_encode($quiz['results']);
     				if (is_object($answers[$key]['outcome_image'])) {
-    				$outcome_flag = true;
-    				$outcome_img_unique_name = time() . uniqid();
-    				$outcome_img_extension = $answer['outcome_image']->getClientOriginalExtension();
-    				$outcome_img_filename = $answer['outcome_image']->move(self::D_PATH, $outcome_img_unique_name . '.' . $outcome_img_extension);
-    				$answers[$key]['outcome_image'] = url('/') . '/' . self::D_PATH . '/' . $outcome_img_unique_name . '.' . $outcome_img_extension;
-    				$outcome_imgs[] = url('/') . '/' . self::D_PATH . '/' . $outcome_img_unique_name . '.' . $outcome_img_extension;
+    					$outcome_flag = true;
+    					$outcome_img_unique_name = time() . uniqid();
+    					$outcome_img_extension = $answer['outcome_image']->getClientOriginalExtension();
+    					$outcome_img_filename = $answer['outcome_image']->move(self::D_PATH, $outcome_img_unique_name . '.' . $outcome_img_extension);
+    					$answers[$key]['outcome_image'] = url('/') . '/' . self::D_PATH . '/' . $outcome_img_unique_name . '.' . $outcome_img_extension;
+    					$outcome_imgs[] = url('/') . '/' . self::D_PATH . '/' . $outcome_img_unique_name . '.' . $outcome_img_extension;
 
     				}else{
 
@@ -192,10 +195,10 @@ class HomeController extends Controller
     		}
     	}
 
-    public function removeQuiz($id)
-    {
-    	$this->home->destroy($id);
-    	Session::flash('success', 'Deleted successfully');
-    	return Redirect::to('list');
+    	public function removeQuiz($id)
+    	{
+    		$this->quiz->destroy($id);
+    		Session::flash('success', 'Deleted successfully');
+    		return Redirect::to('list');
+    	}
     }
-}

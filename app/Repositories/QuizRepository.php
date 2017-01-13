@@ -1,11 +1,12 @@
 <?php
-namespace App\Repositories\Home;
+namespace App\Repositories\Quiz;
 
-use App\Repositories\Home\HomeRepositoryInterface;
+use App\Repositories\Interfaces\QuizInterface;
 use Models\Home\Home as HomeModel;
 
-class HomeRepository implements HomeRepositoryInterface
+class QuizRepository implements QuizInterface
 {
+
 	protected $home;
 
 	public function __construct(HomeModel $home)
@@ -31,11 +32,6 @@ class HomeRepository implements HomeRepositoryInterface
 	public function all()
 	{
 		return $this->home->all();
-	}
-
-	public function count()
-	{
-		return $this->home->all()->count();
 	}
 
 	public function delete($id)
