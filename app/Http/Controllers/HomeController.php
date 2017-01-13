@@ -197,7 +197,7 @@ class HomeController extends Controller
 
     	public function removeQuiz($id)
     	{
-    		$this->quiz->destroy($id);
+    		$this->quiz->delete($id);
     		Session::flash('success', 'Deleted successfully');
     		return Redirect::to('list');
     	}
