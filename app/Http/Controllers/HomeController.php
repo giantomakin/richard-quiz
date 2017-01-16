@@ -84,7 +84,8 @@ class HomeController extends Controller
     		$data = array(
     			'title' => $request->title,
     			'unique_id' => time() . uniqid(),
-    			'type' => $request->type
+    			'type' => $request->type,
+                'data_counter' => ($request->type == 'co') ?json_encode(array(0)) : ''
     			);
     		$id = $this->quiz->create($data)->id;
     		Session::flash('success', 'Added successfully');
