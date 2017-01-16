@@ -1,6 +1,6 @@
 angular.module('RQ', [ 'ngRoute' ]).controller 'frontCtrl', ($scope, $element, $http) ->
   host_path = window.location.pathname.split( '/' );
-  $scope.url = if host_path[1] is 'richard-quiz' then window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' else window.location.protocol + '//' + window.location.host;
+  $scope.url = if host_path[1] is 'richard-quiz' then window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' else window.location.protocol + '//' + window.location.host + '/';
   checkProgress = undefined
   $scope.key = $element.find('#key').val()
   $scope.count = 0

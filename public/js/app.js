@@ -2,7 +2,7 @@
   angular.module('RQ', ['ngRoute']).controller('frontCtrl', function($scope, $element, $http) {
     var checkProgress, host_path;
     host_path = window.location.pathname.split('/');
-    $scope.url = host_path[1] === 'richard-quiz' ? window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' : window.location.protocol + '//' + window.location.host;
+    $scope.url = host_path[1] === 'richard-quiz' ? window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' : window.location.protocol + '//' + window.location.host + '/';
     checkProgress = void 0;
     $scope.key = $element.find('#key').val();
     $scope.count = 0;
@@ -295,7 +295,7 @@
   app.controller('backendCtrl', function($scope, $element, $http) {
     var host_path, question_id;
     host_path = window.location.pathname.split('/');
-    $scope.url = host_path[1] === 'richard-quiz' ? window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' : window.location.protocol + '//' + window.location.host;
+    $scope.url = host_path[1] === 'richard-quiz' ? window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' : window.location.protocol + '//' + window.location.host + '/';
     question_id = void 0;
     $scope.count = 1;
     question_id = $element.find('#question_id').val();

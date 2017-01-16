@@ -1,7 +1,7 @@
 app = angular.module('backendApp', [ 'ngRoute' ])
 app.controller 'backendCtrl', ($scope, $element, $http) ->
   host_path = window.location.pathname.split( '/' );
-  $scope.url = if host_path[1] is 'richard-quiz' then window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' else window.location.protocol + '//' + window.location.host;
+  $scope.url = if host_path[1] is 'richard-quiz' then window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' else window.location.protocol + '//' + window.location.host + '/';
   question_id = undefined
   $scope.count = 1
   question_id = $element.find('#question_id').val()
