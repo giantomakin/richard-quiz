@@ -1,6 +1,8 @@
 (function() {
   angular.module('RQ', ['ngRoute']).controller('frontCtrl', function($scope, $element, $http) {
-    var checkProgress;
+    var checkProgress, host_path;
+    host_path = window.location.pathname.split('/');
+    $scope.url = host_path[1] === 'richard-quiz' ? window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' : window.location.protocol + '//' + window.location.host;
     checkProgress = void 0;
     $scope.key = $element.find('#key').val();
     $scope.count = 0;
@@ -18,7 +20,7 @@
     };
     $http({
       method: 'GET',
-      url: '/quiz/get/' + $scope.key,
+      url: $scope.url + 'quiz/get/' + $scope.key,
       headers: {
         'Content-type': 'application/json'
       }
@@ -82,7 +84,7 @@
       outcome = $(data.target).data('outcome');
       return $http({
         method: 'post',
-        url: '/quiz/result/' + $scope.key + '/' + ans,
+        url: $scope.url + 'quiz/result/' + $scope.key + '/' + ans,
         headers: {
           'Content-type': 'application/json'
         }
@@ -158,7 +160,7 @@
       }
       return $http({
         method: 'post',
-        url: '/quiz/update-counter',
+        url: $scope.url + 'quiz/update-counter',
         data: {
           id: $scope.quiz_id,
           counters: counters
@@ -225,7 +227,7 @@
       id = aid;
       return $http({
         method: 'post',
-        url: '/quiz/result/mc',
+        url: $scope.url + 'quiz/result/mc',
         data: {
           key: $scope.key,
           value: value,
@@ -291,13 +293,15 @@
   app = angular.module('backendApp', ['ngRoute']);
 
   app.controller('backendCtrl', function($scope, $element, $http) {
-    var question_id;
+    var host_path, question_id;
+    host_path = window.location.pathname.split('/');
+    $scope.url = host_path[1] === 'richard-quiz' ? window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' : window.location.protocol + '//' + window.location.host;
     question_id = void 0;
     $scope.count = 1;
     question_id = $element.find('#question_id').val();
     $http({
       method: 'GET',
-      url: '/quiz/api/' + question_id,
+      url: $scope.url + 'quiz/api/' + question_id,
       headers: {
         'Content-type': 'application/json'
       }

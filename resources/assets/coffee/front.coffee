@@ -1,4 +1,6 @@
 angular.module('RQ', [ 'ngRoute' ]).controller 'frontCtrl', ($scope, $element, $http) ->
+  host_path = window.location.pathname.split( '/' );
+  $scope.url = if host_path[1] is 'richard-quiz' then window.location.protocol + '//' + window.location.host + '/richard-quiz/public/' else window.location.protocol + '//' + window.location.host;
   checkProgress = undefined
   $scope.key = $element.find('#key').val()
   $scope.count = 0
@@ -15,7 +17,7 @@ angular.module('RQ', [ 'ngRoute' ]).controller 'frontCtrl', ($scope, $element, $
     'u201': ''
   $http(
     method: 'GET'
-    url: '/quiz/get/' + $scope.key
+    url: $scope.url + 'quiz/get/' + $scope.key
     headers: 'Content-type': 'application/json').then ((response) ->
     shuffle = undefined
     str = undefined
@@ -73,7 +75,7 @@ angular.module('RQ', [ 'ngRoute' ]).controller 'frontCtrl', ($scope, $element, $
     # $scope.doneLoading = false;
     $http(
       method: 'post'
-      url: '/quiz/result/' + $scope.key + '/' + ans
+      url: $scope.url + 'quiz/result/' + $scope.key + '/' + ans
       headers: 'Content-type': 'application/json').then ((response) ->
       $(data.target).parent('a').addClass 'active'
       $element.find('#quizzer-loader').hide()
@@ -139,7 +141,7 @@ angular.module('RQ', [ 'ngRoute' ]).controller 'frontCtrl', ($scope, $element, $
       i++
     $http(
       method: 'post'
-      url: '/quiz/update-counter'
+      url: $scope.url + 'quiz/update-counter'
       data:
         id: $scope.quiz_id
         counters: counters
@@ -193,7 +195,7 @@ angular.module('RQ', [ 'ngRoute' ]).controller 'frontCtrl', ($scope, $element, $
     id = aid
     $http(
       method: 'post'
-      url: '/quiz/result/mc'
+      url: $scope.url + 'quiz/result/mc'
       data:
         key: $scope.key
         value: value
