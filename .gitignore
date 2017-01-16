@@ -2,6 +2,7 @@
 /node_modules
 /public/storage
 /public/examimg
+/public/build
 Homestead.yaml
 Homestead.json
 .env
