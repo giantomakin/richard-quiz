@@ -102,7 +102,7 @@
 			<div ng-repeat="item in items">
 				<div id="answer-container-@{{$index+1}">
 
-				<div class="form-group" hidden>
+				<div class="form-group">
 
 						<label class="col-sm-2 control-label text-right">Answer {{$index+1}} Label:
 						</label>
@@ -131,12 +131,12 @@
 					</div>
 
 				</div>
-				<div class="form-group">
+				<div class="form-group" <?php echo ($quiz['type'] == 'co') ? 'hidden': ''; ?>>
 					<label class="col-sm-2 control-label text-right">Answer Outcome @{{$index+1}}:</label> <div class="col-sm-10">
-					<textarea name="answers[@{{$index+1}}][outcome]" class="form-control" rows="5">@{{item.outcome}}</textarea>
+					<textarea name="answers[@{{$index+1}}][outcome]" class="form-control" rows="5">@{{item.outcome}} </textarea>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" <?php echo ($quiz['type'] == 'co') ? 'hidden': ''; ?>>
 				<label class="col-sm-2 control-label text-right">Answer Ad @{{$index+1}}:</label> <div class="col-sm-10">
 				<textarea name="answers[@{{$index+1}}][ad]" class="form-control" rows="5">@{{item.ad}}</textarea>
 			</div>
