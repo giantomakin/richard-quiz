@@ -181,7 +181,8 @@ class HomeController extends Controller
 
     			endforeach;
 
-    			$quizzermodel->data = stripslashes(str_replace(array("\'","'"),"",json_encode($answers)));
+    			// $quizzermodel->data = stripslashes(str_replace(array("\'","'"),"",json_encode($answers)));
+    			$quizzermodel->data = json_encode($answers, JSON_UNESCAPED_SLASHES);
     			$quizzermodel->title = $quiz['question_title'];
     			$quizzermodel->answer = $quiz['question_answer'];
     			if(!empty($quizzermodel->data_counter)){
