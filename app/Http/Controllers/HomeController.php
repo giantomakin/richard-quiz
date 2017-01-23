@@ -107,13 +107,13 @@ class HomeController extends Controller
 
     	switch ($quizzer->type) {
     		case 'se':
-    		$this->data['iframe_src'] = url('quiz/single') . '/' . $quizzer->unique_id;
+    		$this->data['iframe_src'] = secure_url('quiz/single') . '/' . $quizzer->unique_id;
     		break;
     		case 'co':
-    		$this->data['iframe_src'] = url('quiz/poll') . '/' . $quizzer->unique_id;
+    		$this->data['iframe_src'] = secure_url('quiz/poll') . '/' . $quizzer->unique_id;
     		break;
     		case 'mc':
-    		$this->data['iframe_src'] = url('quiz/multi') . '/' . $quizzer->unique_id;
+    		$this->data['iframe_src'] = secure_url('quiz/multi') . '/' . $quizzer->unique_id;
     		break;
     	}
 
@@ -145,8 +145,8 @@ class HomeController extends Controller
     				$unique_name = time() . uniqid();
     				$extension = $answer['image']->getClientOriginalExtension();
     				$filename = $answer['image']->move(self::D_PATH, $unique_name . '.' . $extension);
-    				$answers[$key]['image'] = url('/') . '/' . self::D_PATH . '/' . $unique_name . '.' . $extension;
-    				$imgs[] = url('/') . '/' . self::D_PATH . '/' . $unique_name . '.' . $extension;
+    				$answers[$key]['image'] = secure_url('/') . '/' . self::D_PATH . '/' . $unique_name . '.' . $extension;
+    				$imgs[] = secure_url('/') . '/' . self::D_PATH . '/' . $unique_name . '.' . $extension;
 
     				if(!empty($quizzermodel->data_counter))
     				{
@@ -167,8 +167,8 @@ class HomeController extends Controller
     					$outcome_img_unique_name = time() . uniqid();
     					$outcome_img_extension = $answer['outcome_image']->getClientOriginalExtension();
     					$outcome_img_filename = $answer['outcome_image']->move(self::D_PATH, $outcome_img_unique_name . '.' . $outcome_img_extension);
-    					$answers[$key]['outcome_image'] = url('/') . '/' . self::D_PATH . '/' . $outcome_img_unique_name . '.' . $outcome_img_extension;
-    					$outcome_imgs[] = url('/') . '/' . self::D_PATH . '/' . $outcome_img_unique_name . '.' . $outcome_img_extension;
+    					$answers[$key]['outcome_image'] = secure_url('/') . '/' . self::D_PATH . '/' . $outcome_img_unique_name . '.' . $outcome_img_extension;
+    					$outcome_imgs[] = secure_url('/') . '/' . self::D_PATH . '/' . $outcome_img_unique_name . '.' . $outcome_img_extension;
 
     				}else{
 
