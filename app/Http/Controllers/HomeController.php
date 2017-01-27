@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Repositories\Quiz\QuizRepository;
 use App\Repositories\Quiz\CountableRepository;
+use App\Repositories\Quiz\AdsRepository;
 use Validator;
 use Redirect;
 use Session;
@@ -25,22 +26,28 @@ class HomeController extends Controller
 		'question_answer' => 'required'
 		);
 
+	private $rules3 = array(
+		'content' => 'required'
+		);
+
 	const D_PATH = 'examimg';
 
 	private $validator;
 	protected $quiz;
 	protected $countable;
+	protected $ads;
 	protected $data;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(QuizRepository $quiz, CountableRepository $countable)
+    public function __construct(QuizRepository $quiz, CountableRepository $countable, AdsRepository $ads)
     {
     	$this->middleware('auth');
     	$this->quiz = $quiz;
     	$this->countable = $countable;
+    	$this->ads = $ads;
     	$this->data['quiz_count'] = $this->countable->count();
     }
 
@@ -64,6 +71,12 @@ class HomeController extends Controller
     public function createUserView()
     {
     	return view('create-user',$this->data);
+    }
+
+    public function adsView()
+    {
+    	$this->data['ads_list'] = $this->ads->getAll();
+    	return view('ads',$this->data);
     }
 
     public function quizList()
@@ -92,6 +105,25 @@ class HomeController extends Controller
     		$id = $this->quiz->create($data)->id;
     		Session::flash('success', 'Added successfully');
     		return Redirect::to('quiz/' . $id);
+    	}
+    }
+
+    public function createAd(Request $request)
+    {
+    	$this->validator = Validator::make($request->all(), $this->rules3);
+    	if ($this->validator->fails()) {
+
+    		return Redirect::to('ads')
+    		->withErrors($this->validator);
+
+    	} else {
+    		$data = array(
+    			'ad_content' => $request->content,
+    			'ad_position' => $request->position
+    			);
+    		$id = $this->ads->create($data);
+    		Session::flash('success', 'Added successfully');
+    		return Redirect::to('ads');
     	}
     }
 
@@ -205,4 +237,12 @@ class HomeController extends Controller
     		Session::flash('success', 'Deleted successfully');
     		return Redirect::to('list');
     	}
+
+    	public function removeAd($id)
+    	{
+    		$this->ads->delete($id);
+    		Session::flash('success', 'Deleted successfully');
+    		return Redirect::to('ads');
+    	}
+
     }

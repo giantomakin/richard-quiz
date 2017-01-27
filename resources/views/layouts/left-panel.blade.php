@@ -6,5 +6,6 @@
 	      <a href="{{url('create/user')}}" class="list-group-item {{ Request::is('create/user') ? 'active' : '' }}">Create User</a>
 	      <a href="{{url('create')}}" class="list-group-item {{ Request::is('create') ? 'active' : '' }}">Create Quiz</a>
 	      <a href="{{url('list')}}" class="list-group-item {{ Request::is('list') ? 'active' : '' }}">My Quizzes<span class="badge">{{$quiz_count}}</span></a>
+	      <a href="{{url('ads')}}" class="list-group-item {{ Request::is('ads') ? 'active' : '' }}">My Ads<span class="badge">{{$quiz_count}}</span></a>
 	    </div>
 	</div>

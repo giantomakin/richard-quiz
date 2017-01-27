@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Repositories\Quiz\QuizRepository;
 use App\Repositories\Quiz\CountableRepository;
+use App\Repositories\Quiz\AdsRepository;
 use Validator;
 use Redirect;
 use Session;
@@ -16,14 +17,16 @@ class FrontController extends Controller
 {
 
 	protected $quiz;
+	protected $ads;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(QuizRepository $quiz)
+    public function __construct(QuizRepository $quiz, AdsRepository $ads)
     {
     	$this->quiz = $quiz;
+    	$this->ads = $ads;
     }
 
     /**
@@ -101,6 +104,13 @@ class FrontController extends Controller
 
     	echo $quizz->data;
 
+    }
+
+    public function getAds()
+    {
+    	$result = $this->ads->getAll();
+
+    	return Response::json($result);
     }
 
 }

@@ -28,7 +28,9 @@ class AppServiceProvider extends ServiceProvider
         	'App\Repositories\QuizRepository',
         	'App\Repositories\CountableRepository',
         	'App\Repositories\QuizInterface',
-        	'App\Repositories\CountableInterface'
+        	'App\Repositories\CountableInterface',
+        	'App\Repositories\AdsRepository',
+        	'App\Repositories\AdsInterface'
         	);
     }
 }
