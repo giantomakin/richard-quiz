@@ -51,6 +51,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+    	$colorarr = array(' ','blue-card','red-card','green-card','yellow-card');
+    	$this->data['color'] = $colorarr[rand(0,4)];
     	return view('home',$this->data);
     }
 

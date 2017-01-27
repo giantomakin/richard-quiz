@@ -25,3 +25,13 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+<script>
+	$.get('http://quotes.rest/qod.json?category=inspire ').done(function(data){
+		console.log(data.contents.quotes[0]);
+		$('#q-content').text(data.contents.quotes[0].quote);
+		$('#q-cite').text(data.contents.quotes[0].author);
+
+	});
+</script>
+@endsection
